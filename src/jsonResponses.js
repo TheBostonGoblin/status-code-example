@@ -17,6 +17,14 @@ const badRequest = (request, response, params) => {
     message: 'This request has the required parameters',
   };
 
+  if(!params.valid || params.valid !== 'true'){
+    respondJSON.message = 'missing valid query param set equal to true';
+    responseJSON.id = 'badrequestValidParam';
+    return respondJSON(request,response,400, responseJSON);
+  }
+
+  return respondJSON(request,response,200,responseJSON)
+
 };
 
 const notFound = (request, response) => {
@@ -24,6 +32,8 @@ const notFound = (request, response) => {
     message: 'The page you are looking for was not found.',
     id: 'notFound',
   };
+
+  return respondJSON(request,response,404,responseJSON);
 
 };
 
